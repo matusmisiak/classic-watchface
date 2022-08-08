@@ -1,0 +1,81 @@
+{
+    "configVersion": "v2",
+    "app": {
+        "appId": 26230,
+        "appName": "Classic Digital",
+        "appType": "watchface",
+        "version": {
+            "code": 1,
+            "name": "1.0.1"
+        },
+        "icon": "img/icon.png",
+        "vender": "zepp",
+        "description": "Digital editable watch face inspired by Mi Band 7 default"
+    },
+    "permissions": [],
+    "runtime": {
+        "apiVersion": {
+            "compatible": "1.0.0",
+            "target": "1.0.1",
+            "minVersion": "1.0.0"
+        },
+        "type": 2
+    },
+    "targets": {
+        "l66": {
+            "module": {
+                "watchface": {
+                    "path": "watchface/index",
+                    "main": 1,
+                    "editable": 1,
+                    "lockscreen": 0,
+                    "photoscreen": 0
+                }
+            },
+            "platforms": [
+                {
+                    "name": "l66",
+                    "deviceSource": 260
+                },
+                {
+                    "name": "l66w",
+                    "deviceSource": 261
+                },
+                {
+                    "name": "l66_1",
+                    "deviceSource": 262
+                },
+                {
+                    "name": "l66w_2",
+                    "deviceSource": 263
+                },
+                {
+                    "name": "l66_3",
+                    "deviceSource": 264
+                },
+                {
+                    "name": "l66_4",
+                    "deviceSource": 265
+                },
+                {
+                    "name": "l66_5",
+                    "deviceSource": 266
+                }
+            ],
+            "designWidth": 192
+        }
+    },
+    "i18n": {
+        "en-US": {
+            "appName": "zepp",
+            "icon": "images/icon.png"
+        },
+        "zh-CN": {
+            "icon": "images/icon.png"
+        },
+        "zh-TW": {
+            "icon": "images/icon.png"
+        }
+    },
+    "defaultLanguage": "en-US"
+}
