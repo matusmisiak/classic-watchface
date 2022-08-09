@@ -1,6 +1,6 @@
 # Classic Watchface
 
-![Preview](assets/l66/images/icon.svg)
+![Preview](assets/l66/images/icon.png)
 
 I really liked the default watchface on Xiaomi Smart Band 7, but I missed the digital clock.
 
