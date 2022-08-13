@@ -13,7 +13,7 @@ I really liked the default watchface on Xiaomi Smart Band 7, but I missed the di
 
 I found useful the official [Zepp OS Dev documentation](https://docs.zepp.com/).
 
-## Creits
+## Credits
 
 Used font: [Rubik](https://github.com/googlefonts/rubik)
 
