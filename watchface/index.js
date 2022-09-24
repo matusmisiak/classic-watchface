@@ -244,13 +244,25 @@ WatchFace({
             makeProgress(i, EDIT_TYPES.indexOf(groups[i].getProperty(hmUI.prop.CURRENT_TYPE)))
         }
         for (let i of PROGRESSES.keys()) {
-            hmUI.createWidget(hmUI.widget.IMG_CLICK, {
-                x: [0, DW/2][i % 2],
-                y: [0, DH-DW/2-I_SIZE-I_SPACE_V][Math.floor(i/2) % 2],
-                w: DW/2,
-                h: DW/2+I_SIZE+I_SPACE_V,
-                type: groups[i].getProperty(hmUI.prop.CURRENT_TYPE)
-            })
+            if (groups[i].getProperty(hmUI.prop.CURRENT_TYPE) === hmUI.data_type.PAI_WEEKLY) {
+                hmUI.createWidget(hmUI.widget.IMG, {
+                    x: [0, DW / 2][i % 2],
+                    y: [0, DH - DW / 2 - I_SIZE - I_SPACE_V][Math.floor(i / 2) % 2],
+                    w: DW / 2,
+                    h: DW / 2 + I_SIZE + I_SPACE_V,
+                    //type: groups[i].getProperty(hmUI.prop.CURRENT_TYPE)
+                }).addEventListener(hmUI.event.CLICK_DOWN, function (info) {
+                    hmApp.startApp({ url: 'pai_app_Screen', native: true })
+                });
+            } else {
+                hmUI.createWidget(hmUI.widget.IMG_CLICK, {
+                    x: [0, DW / 2][i % 2],
+                    y: [0, DH - DW / 2 - I_SIZE - I_SPACE_V][Math.floor(i / 2) % 2],
+                    w: DW / 2,
+                    h: DW / 2 + I_SIZE + I_SPACE_V,
+                    type: groups[i].getProperty(hmUI.prop.CURRENT_TYPE)
+                })
+            }
         }
 
         // Center widget
