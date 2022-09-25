@@ -35,17 +35,18 @@ zeus build
 
 > If you get an error in PowerShell, try using cmd.
 
-### 4. Prepare for Zepp Life
+### 4. Prepare for sync
 
 ```
 python extract_bin.py
 ```
 
-### 5. Copy to Zepp Life
+### 5. Sync with band
 
-Copy `dist/<app_id>` directory to `storage/emulated/0/Android/data/com.xiaomi.hm.health/files/watch_skin_local/` on your phone and install on.
+Use [Mi Band 7 Watch Faces](https://play.google.com/store/apps/details?id=asn.ark.miband7) or similar app and select `.bin` file and `icon.png`.
 
-> If you use any app for custom watchfaces, you can directly install the `.bin` file.
+
+> You can directly copy `dist/<app_id>` directory to `storage/emulated/0/Android/data/com.xiaomi.hm.health/files/watch_skin_local/` on your phone and install using Zepp Life, although it is only possible on versions earlier than 6.3.3.
 
 ## Credits
 
