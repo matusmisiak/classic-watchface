@@ -251,7 +251,7 @@ WatchFace({
                     w: DW / 2,
                     h: DW / 2 + I_SIZE + I_SPACE_V,
                     //type: groups[i].getProperty(hmUI.prop.CURRENT_TYPE)
-                }).addEventListener(hmUI.event.CLICK_DOWN, function (info) {
+                }).addEventListener(hmUI.event.CLICK_UP, function (info) {
                     hmApp.startApp({ url: 'pai_app_Screen', native: true })
                 });
             } else {
