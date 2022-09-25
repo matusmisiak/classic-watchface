@@ -55,4 +55,3 @@ Used font: [Rubik](https://github.com/googlefonts/rubik)
 ## Notes
 
 - Date is currently only in DD/MM format
-- Jump on PAI doesn't work
