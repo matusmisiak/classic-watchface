@@ -28,6 +28,7 @@ for path in glob.glob(os.path.join(bindir, '*.zab')):
         )
     shutil.rmtree(temp)
 
-os.rename(os.path.join(result, 'l66.bin'), os.path.join(result, app_id+'.bin'))
+os.rename(glob.glob(os.path.join(result, 'l66*.bin'))[0], os.path.join(result, app_id+'.bin'))
+
 shutil.copyfile('assets/l66/images/icon.png', os.path.join(result, 'icon.png'))
 shutil.copyfile('infos.xml', os.path.join(result, 'infos.xml'))
