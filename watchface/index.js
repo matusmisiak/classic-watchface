@@ -27,6 +27,7 @@ const EDIT_TYPES = [
     hmUI.data_type.PAI_WEEKLY,
     hmUI.data_type.BATTERY
 ]
+const DEFAULTS_ORDER = [0, 1, 3, 4]
 
 const I_DIR = IMG+'icons/'
 const IL_DIR = IMG+'icons_l/'
@@ -127,7 +128,7 @@ WatchFace({
                 h: DW/2,
                 select_image: IMG+'masks/select.png',
                 un_select_image: IMG+'masks/unselect.png',
-                default_type: EDIT_TYPES[0],
+                default_type: EDIT_TYPES[DEFAULTS_ORDER[i]],
                 optional_types: opt_types,
                 count: opt_types.length,
                 ...EDIT_GROUP_PROP
