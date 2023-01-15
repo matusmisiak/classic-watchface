@@ -50,7 +50,9 @@ const EDIT_GROUP_PROP = {
 }
 
 const C_SIZE = 70
-const C_DEFAULT = hmUI.data_type.HEART
+const C1_DEFAULT = hmUI.data_type.HEART
+const C2_DEFAULT = hmUI.data_type.WEATHER
+const C_POS = [DH-DW/2-5, PROGRESS_TH+10]
 
 const W_SIZE = 40
 
@@ -108,6 +110,13 @@ WatchFace({
                 preview: IL_DIR+EDITS[i][0]
             })
         }
+        let c_opt_types = [
+            ...opt_types,
+            {
+                type: hmUI.data_type.WEATHER,
+                preview: IL_DIR+'weather.png'
+            }
+        ]
         let groups = []
         for (let i of PROGRESSES.keys()) {
             groups.push(makeEditGroup({
@@ -124,18 +133,27 @@ WatchFace({
                 ...EDIT_GROUP_PROP
             }))
         }
-        let centerGroup = makeEditGroup({
-            edit_id: 110,
+        const centerInfo = {
             x: (DW-C_SIZE)/2,
-            y: DH-DW/2-C_SIZE,
             w: C_SIZE,
             h: C_SIZE,
             select_image: IMG+'masks/select-c.png',
             un_select_image: IMG+'masks/unselect-c.png',
-            default_type: C_DEFAULT,
-            optional_types: opt_types,
-            count: opt_types.length,
+            optional_types: c_opt_types,
+            count: c_opt_types.length,
             ...EDIT_GROUP_PROP
+        }
+        let centerGroup1 = makeEditGroup({
+            edit_id: 110,
+            y: C_POS[0]-C_SIZE,
+            default_type: C1_DEFAULT,
+            ...centerInfo
+        })
+        let centerGroup2 = makeEditGroup({
+            edit_id: 111,
+            y: C_POS[1]+C_SIZE,
+            default_type: C2_DEFAULT,
+            ...centerInfo
         })
 
         const dateline = DH/2+T_HEIGHT+T_SPACE/2+12
@@ -265,62 +283,76 @@ WatchFace({
             }
         }
 
-        // Center widget
-        let cType = centerGroup.getProperty(hmUI.prop.CURRENT_TYPE)
-        hmUI.createWidget(hmUI.widget.IMG, { // icon
-            x: (DW-IL_SIZE)/2,
-            y: DH-DW/2-5,
-            src: IL_DIR+EDITS[EDIT_TYPES.indexOf(cType)][0],
-            show_level: hmUI.show_level.ONLY_NORMAL
-        })
-        hmUI.createWidget(hmUI.widget.TEXT_IMG, {
-            x: 0,
-            y: DH-DW/2-5+IL_SIZE+I_SPACE_V,
-            w: DW,
-            align_h: hmUI.align.CENTER_H,
-            h_space: 2,
-            font_array: wNums,
-            type: cType,
-            show_level: hmUI.show_level.ONLY_NORMAL
-        })
-        hmUI.createWidget(hmUI.widget.IMG_CLICK, {
-            x: (DW-IL_SIZE)/2,
-            y: DH-DW/2-5,
-            w: IL_SIZE,
-            h: IL_SIZE+I_SPACE_V+20,
-            type: cType
-        })
-
-        // Weather
-        let weatherWidget = hmUI.createWidget(hmUI.widget.IMG_LEVEL, { // icon
-            x: (DW-W_SIZE)/2,
-            y: PROGRESS_TH+10,
-            image_array: weathers,
-            image_length: weathers.length,
-            type: hmUI.data_type.WEATHER,
-            show_level: hmUI.show_level.ONLY_NORMAL
-        })
-        hmUI.createWidget(hmUI.widget.TEXT_IMG, { // temperature
-            x: 0,
-            y: PROGRESS_TH+10+W_SIZE+I_SPACE_V,
-            w: DW,
-            align_h: hmUI.align.CENTER_H,
-            h_space: 2,
-            font_array: wNums,
-            negative_image: wMinus,
-            unit_sc: wDegree,
-            unit_en: wDegree,
-            unit_tc: wDegree,
-            type: hmUI.data_type.WEATHER_CURRENT,
-            show_level: hmUI.show_level.ONLY_NORMAL
-        })
-        hmUI.createWidget(hmUI.widget.IMG_CLICK, {
-            x: (DW-W_SIZE)/2,
-            y: PROGRESS_TH+10,
-            w: W_SIZE,
-            h: W_SIZE+I_SPACE_V+20,
-            type: hmUI.data_type.WEATHER
-        })
+        // Center widgets
+        function makeWidget(cType, current_y) {
+            // Center widget
+            hmUI.createWidget(hmUI.widget.IMG, { // icon
+                x: (DW-IL_SIZE)/2,
+                y: current_y,
+                src: IL_DIR+EDITS[EDIT_TYPES.indexOf(cType)][0],
+                show_level: hmUI.show_level.ONLY_NORMAL
+            })
+            hmUI.createWidget(hmUI.widget.TEXT_IMG, {
+                x: 0,
+                y: current_y+IL_SIZE+I_SPACE_V,
+                w: DW,
+                align_h: hmUI.align.CENTER_H,
+                h_space: 2,
+                font_array: wNums,
+                type: cType,
+                show_level: hmUI.show_level.ONLY_NORMAL
+            })
+            hmUI.createWidget(hmUI.widget.IMG_CLICK, {
+                x: (DW-IL_SIZE)/2,
+                y: current_y,
+                w: IL_SIZE,
+                h: IL_SIZE+I_SPACE_V+20,
+                type: cType
+            })
+        }
+        function makeWeather(current_y) {
+            // Weather
+            let weatherWidget = hmUI.createWidget(hmUI.widget.IMG_LEVEL, { // icon
+                x: (DW-W_SIZE)/2,
+                y: current_y,
+                image_array: weathers,
+                image_length: weathers.length,
+                type: hmUI.data_type.WEATHER,
+                show_level: hmUI.show_level.ONLY_NORMAL
+            })
+            hmUI.createWidget(hmUI.widget.TEXT_IMG, { // temperature
+                x: 0,
+                y: current_y+W_SIZE+I_SPACE_V,
+                w: DW,
+                align_h: hmUI.align.CENTER_H,
+                h_space: 2,
+                font_array: wNums,
+                negative_image: wMinus,
+                unit_sc: wDegree,
+                unit_en: wDegree,
+                unit_tc: wDegree,
+                type: hmUI.data_type.WEATHER_CURRENT,
+                show_level: hmUI.show_level.ONLY_NORMAL
+            })
+            hmUI.createWidget(hmUI.widget.IMG_CLICK, {
+                x: (DW-W_SIZE)/2,
+                y: current_y,
+                w: W_SIZE,
+                h: W_SIZE+I_SPACE_V+20,
+                type: hmUI.data_type.WEATHER
+            })
+        }
+        let cTypes = [
+            centerGroup1.getProperty(hmUI.prop.CURRENT_TYPE),
+            centerGroup2.getProperty(hmUI.prop.CURRENT_TYPE)
+        ]
+        for (let i in cTypes) {
+            if (cTypes[i] === hmUI.data_type.WEATHER) {
+                makeWeather(C_POS[i])
+            } else {
+                makeWidget(cTypes[i], C_POS[i])
+            }
+        }
 
         // Status
         hmUI.createWidget(hmUI.widget.IMG_STATUS, { // bluetooth
